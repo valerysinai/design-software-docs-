@@ -1,6 +1,6 @@
 # Dominio
 
-> Estado: 🔴 Pendiente | Última actualización: 2026-06-16
+> Estado: 🟡 Pendiente | Última actualización: 2026-06-22
 > Autor: Por definir | Equipo: Por definir
 
 ## Contenido
@@ -13,6 +13,6 @@ Define el modelo de dominio, las entidades principales, reglas de negocio y even
 
 | Archivo | Descripción | Estado |
 |---------|-------------|--------|
-| [domain-map.md](./domain-map.md) | Mapa de dominio y contextos principales | 🔴 |
-| [entities-and-rules.md](./entities-and-rules.md) | Entidades, invariantes y reglas de negocio | 🔴 |
-| [domain-events.md](./domain-events.md) | Eventos de dominio y significado funcional | 🔴 |
+| [domain-map.md](./domain-map.md) | Mapa de dominio y contextos principales | 🟡 |
+| [entities-and-rules.md](./entities-and-rules.md) | Entidades, invariantes y reglas de negocio | 🟡 |
+| [domain-events.md](./domain-events.md) | Eventos de dominio y significado funcional | 🟡 |
