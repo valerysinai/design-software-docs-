@@ -168,3 +168,68 @@ Realizar seguimiento al avance de proyectos formativos.
 ### RF-09.02 Notificaciones
 
 Generar notificaciones asociadas a eventos relevantes del proyecto.
+
+---
+
+# RF-10 Reportes
+
+## RF-10.01 Reportes académicos
+
+El sistema deberá generar reportes de programación académica filtrados por centro de formación, programa, ficha, instructor y ambiente.
+
+## RF-10.02 Exportación de información
+
+El sistema deberá permitir exportar reportes en formatos PDF y Excel.
+
+## RF-10.03 Indicadores operativos
+
+El sistema deberá mostrar indicadores relacionados con ocupación de ambientes, carga de instructores y ejecución de horarios.
+
+---
+
+# RF-11 Notificaciones
+
+## RF-11.01 Notificaciones automáticas
+
+El sistema deberá enviar notificaciones cuando se creen, modifiquen o cancelen horarios.
+
+## RF-11.02 Alertas de conflicto
+
+El sistema deberá informar automáticamente la detección de conflictos de programación.
+
+## RF-11.03 Recordatorios
+
+El sistema deberá generar recordatorios de actividades programadas para instructores y aprendices.
+
+---
+
+# RF-12 Gestión Documental
+
+## RF-12.01 Administración de plantillas
+
+El sistema deberá permitir gestionar plantillas institucionales asociadas a procesos académicos.
+
+## RF-12.02 Control de versiones
+
+El sistema deberá mantener un historial de versiones de los documentos almacenados.
+
+## RF-12.03 Consulta documental
+
+El sistema deberá permitir la búsqueda y consulta de documentos asociados a programas, fichas y ambientes.
+
+---
+
+# RF-13 Auditoría y Monitoreo
+
+## RF-13.01 Registro de eventos
+
+El sistema deberá registrar eventos críticos realizados por los usuarios.
+
+## RF-13.02 Consulta de auditoría
+
+El sistema deberá permitir consultar la trazabilidad de las acciones ejecutadas.
+
+## RF-13.03 Métricas operativas
+
+El sistema deberá recopilar y visualizar métricas de desempeño y utilización de los servicios.
+
