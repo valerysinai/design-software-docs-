@@ -1,170 +1,208 @@
 # Requisitos Funcionales
 
-> Estado: 🟡 En progreso | Última actualización: 2026-06-22
+> Estado: 🟡 En progreso | Última actualización: 2026-06-25
 > Autor: Por definir | Equipo: Por definir
 
-## RF-01 Seguridad y Acceso
+## Propósito
 
-### RF-01.01 Gestión de autenticación
+Este documento define los requerimientos funcionales del Sistema de Gestión de Horarios del SENA.
+
+Los requerimientos se encuentran organizados por módulos funcionales, alineados con los contextos de dominio definidos para la arquitectura del sistema.
+
+---
+
+# RF-01 Gestión de Identidad y Acceso
+
+## RF-01.01 Autenticación
 
 El sistema debe permitir el inicio y cierre de sesión mediante credenciales válidas.
 
-### RF-01.02 Gestión de usuarios
+## RF-01.02 Gestión de usuarios
 
-El sistema debe permitir crear, actualizar, consultar y desactivar usuarios.
+El sistema debe permitir registrar, consultar, actualizar y desactivar usuarios.
 
-### RF-01.03 Gestión de roles y permisos
+## RF-01.03 Gestión de roles y permisos
 
-El sistema debe permitir administrar perfiles de acceso y permisos asociados.
+El sistema debe permitir administrar perfiles de acceso y permisos asociados a cada usuario.
 
-### RF-01.04 Multi-tenant
+## RF-01.04 Gestión de sesiones
 
-El sistema debe garantizar el aislamiento lógico de la información según la estructura institucional correspondiente.
+El sistema debe controlar la vigencia de las sesiones activas y permitir su finalización segura.
 
-### RF-01.05 Auditoría
+## RF-01.05 Auditoría de acceso
 
-El sistema debe registrar las acciones realizadas por los usuarios sobre los recursos del sistema.
-
----
-
-## RF-02 Estructura Institucional
-
-### RF-02.01 Gestión de regionales
-
-Administrar regionales del SENA.
-
-### RF-02.02 Gestión de centros de formación
-
-Administrar centros de formación asociados a cada regional.
-
-### RF-02.03 Gestión de ubicaciones
-
-Registrar y consultar ubicaciones físicas asociadas a centros y ambientes.
+El sistema debe registrar los eventos relacionados con autenticación y autorización.
 
 ---
 
-## RF-03 Infraestructura y Ambientes
+# RF-02 Información Institucional
 
-### RF-03.01 Gestión de ambientes
+## RF-02.01 Gestión de regionales
 
-Registrar y administrar ambientes de formación.
+El sistema debe permitir administrar las regionales del SENA.
 
-### RF-03.02 Gestión de inventario
+## RF-02.02 Gestión de centros de formación
 
-Administrar recursos físicos asociados a cada ambiente.
+El sistema debe permitir administrar los centros de formación asociados a cada regional.
 
-### RF-03.03 Disponibilidad de ambientes
+## RF-02.03 Gestión de parámetros
 
-Controlar la disponibilidad de ambientes para programación académica.
+El sistema debe permitir configurar parámetros generales utilizados por la plataforma.
 
----
+## RF-02.04 Gestión de catálogos
 
-## RF-04 Parametrización
-
-### RF-04.01 Catálogos base
-
-Administrar catálogos reutilizados por los diferentes módulos.
-
-### RF-04.02 Parámetros generales
-
-Configurar parámetros operativos del sistema.
+El sistema debe administrar catálogos reutilizados por los diferentes módulos.
 
 ---
 
-## RF-05 Programas de Formación
+# RF-03 Gestión Académica
 
-### RF-05.01 Gestión de programas
+## RF-03.01 Gestión de programas
 
 Administrar programas de formación.
 
-### RF-05.02 Tipos de formación
+## RF-03.02 Gestión de competencias
 
-Administrar modalidades y tipos de formación.
+Administrar competencias asociadas a cada programa.
 
-### RF-05.03 Líneas tecnológicas
+## RF-03.03 Gestión de RAP
 
-Gestionar líneas tecnológicas institucionales.
+Administrar resultados de aprendizaje.
 
-### RF-05.04 Diseño curricular
+## RF-03.04 Gestión del diseño curricular
 
-Administrar competencias y estructuras curriculares.
+Administrar la estructura curricular de los programas.
 
-### RF-05.05 Gestión de RAP
-
-Administrar resultados de aprendizaje asociados a competencias.
-
----
-
-## RF-06 Oferta y Programas
-
-### RF-06.01 Gestión de proyectos formativos
-
-Administrar proyectos formativos.
-
-### RF-06.02 Gestión de fichas
+## RF-03.05 Gestión de fichas
 
 Crear y administrar fichas de formación.
 
-### RF-06.03 Asociación de aprendices
+## RF-03.06 Gestión de proyectos formativos
 
-Permitir la asignación de aprendices a fichas.
-
-### RF-06.04 Gestión de entregables
-
-Administrar entregables asociados a proyectos formativos.
+Administrar proyectos formativos asociados a las fichas.
 
 ---
 
-## RF-07 Actores
+# RF-04 Gestión de Actores
 
-### RF-07.01 Gestión de instructores
+## RF-04.01 Gestión de instructores
 
-Administrar información de instructores.
+Administrar la información de los instructores.
 
-### RF-07.02 Gestión de aprendices
+## RF-04.02 Gestión de aprendices
 
-Administrar información de aprendices.
+Administrar la información de los aprendices.
 
-### RF-07.03 Gestión de directivos
+## RF-04.03 Gestión de coordinadores y directivos
 
-Administrar información de directivos.
-
----
-
-## RF-08 Horarios
-
-### RF-08.01 Programación de horarios
-
-Crear y administrar horarios académicos.
-
-### RF-08.02 Asignación de instructores
-
-Asignar instructores a sesiones de formación.
-
-### RF-08.03 Asignación de ambientes
-
-Asignar ambientes disponibles a las sesiones programadas.
-
-### RF-08.04 Gestión de observaciones
-
-Registrar observaciones relacionadas con la programación.
-
-### RF-08.05 Gestión de incidencias
-
-Registrar y consultar incidencias académicas.
-
-### RF-08.06 Detección de conflictos
-
-Identificar conflictos de programación antes de confirmar horarios.
+Administrar los usuarios responsables de la gestión académica.
 
 ---
 
-## RF-09 Proyectos Formativos
+# RF-05 Gestión de Ambientes
 
-### RF-09.01 Seguimiento
+## RF-05.01 Gestión de ambientes
 
-Realizar seguimiento al avance de proyectos formativos.
+Registrar y administrar ambientes de formación.
 
-### RF-09.02 Notificaciones
+## RF-05.02 Gestión de recursos
 
-Generar notificaciones asociadas a eventos relevantes del proyecto.
+Administrar el inventario de recursos disponibles en cada ambiente.
+
+## RF-05.03 Disponibilidad de ambientes
+
+Controlar la disponibilidad de los ambientes para la programación académica.
+
+## RF-05.04 Gestión de mantenimiento
+
+Registrar periodos de mantenimiento o indisponibilidad de los ambientes.
+
+---
+
+# RF-06 Gestión de Horarios
+
+## RF-06.01 Programación de horarios
+
+Crear, consultar, actualizar y cancelar horarios académicos.
+
+## RF-06.02 Asignación de instructores
+
+Asignar instructores a las sesiones programadas.
+
+## RF-06.03 Asignación de ambientes
+
+Asignar ambientes disponibles a cada sesión.
+
+## RF-06.04 Validación de restricciones
+
+Validar disponibilidad de instructores, ambientes y franjas horarias antes de confirmar una programación.
+
+## RF-06.05 Detección de conflictos
+
+Detectar conflictos de programación antes de registrar un horario.
+
+## RF-06.06 Reprogramación
+
+Permitir modificar horarios existentes manteniendo la trazabilidad de los cambios.
+
+---
+
+# RF-07 Seguimiento y Monitoreo
+
+## RF-07.01 Gestión de indicadores
+
+Calcular indicadores relacionados con la programación académica.
+
+## RF-07.02 Gestión de alertas
+
+Generar alertas cuando se detecten situaciones que requieran atención.
+
+## RF-07.03 Notificaciones
+
+Enviar notificaciones a los usuarios involucrados en eventos relevantes.
+
+## RF-07.04 Dashboard
+
+Mostrar información consolidada mediante tableros de control.
+
+---
+
+# RF-08 Gestión Documental
+
+## RF-08.01 Generación de documentos
+
+Generar automáticamente documentos asociados a los procesos académicos.
+
+## RF-08.02 Gestión de plantillas
+
+Administrar las plantillas utilizadas para la generación de documentos.
+
+## RF-08.03 Exportación de información
+
+Permitir la exportación de reportes en formato PDF.
+
+---
+
+# RF-09 Auditoría y Trazabilidad
+
+## RF-09.01 Registro de auditoría
+
+Registrar todas las operaciones relevantes realizadas en la plataforma.
+
+## RF-09.02 Consulta de auditoría
+
+Permitir consultar el historial de cambios realizados sobre las entidades del sistema.
+
+## RF-09.03 Trazabilidad de eventos
+
+Mantener la trazabilidad de las operaciones ejecutadas entre los diferentes módulos.
+
+---
+
+# Referencias
+
+- [../02-domain/domain-map.md](../02-domain/domain-map.md)
+- [../02-domain/entities/](../02-domain/entities/)
+- [../03-product/product-backlog.md](../03-product/product-backlog.md)
+- [non-functional.md](./non-functional.md)
+- [user-stories.md](./user-stories.md)

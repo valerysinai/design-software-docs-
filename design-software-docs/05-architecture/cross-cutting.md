@@ -1,72 +1,96 @@
-# Aspectos Transversales
+# Aspectos Transversales de la Arquitectura
 
-> Estado: 🟢 Completo | Última actualización: 2026-06-22
+> Estado: 🟡 En progreso | Última actualización: 2026-06-25
 > Autor: Por definir
+> Equipo: Por derfinir
 
-## Seguridad
+## Objetivo
 
-### Autenticación
-
-* JWT.
-* OAuth2/OpenID Connect.
-* Refresh Tokens.
-
-### Autorización
-
-* RBAC (Role-Based Access Control).
-* Validación centralizada de permisos.
-
-### Protección de Datos
-
-* TLS 1.3.
-* Cifrado de información sensible.
-* Gestión segura de secretos.
+Describir los componentes y principios transversales que aplican a toda la arquitectura del sistema, independientemente del dominio de negocio al que pertenezca cada microservicio.
 
 ---
 
-## Auditoría
+# Seguridad
 
-Todos los servicios deberán generar eventos auditables.
+La seguridad es un aspecto transversal presente en todos los servicios de la plataforma.
 
-Cada evento incluirá:
+## Autenticación
 
-* Usuario.
-* Fecha y hora.
-* Operación.
-* Servicio origen.
-* Recurso afectado.
-* Resultado.
+Se implementará mediante:
 
----
+- JWT (JSON Web Token).
+- OAuth2 / OpenID Connect.
+- Refresh Tokens.
 
-## Observabilidad
+## Autorización
 
-### Logging
+El acceso a los recursos será controlado mediante:
 
-Logs estructurados centralizados.
+- RBAC (Role-Based Access Control).
+- Validación centralizada de permisos.
+- Verificación de roles antes de ejecutar operaciones.
 
-### Métricas
+## Protección de datos
 
-* Uso de CPU.
-* Uso de memoria.
-* Latencia.
-* Errores.
+Se aplicarán las siguientes medidas:
 
-### Trazabilidad
-
-Correlation ID para seguimiento entre servicios.
+- Comunicación cifrada mediante TLS 1.3.
+- Cifrado de información sensible.
+- Gestión segura de secretos y credenciales.
+- Protección de datos personales conforme a la normativa vigente.
 
 ---
 
-## Gestión de Errores
+# Auditoría
 
-Todos los servicios implementarán:
+Todos los microservicios deberán registrar las operaciones críticas ejecutadas por los usuarios.
 
-* Manejo global de excepciones.
-* Respuestas estandarizadas.
-* Catálogo de errores.
+Cada registro de auditoría deberá incluir como mínimo:
 
-Formato:
+- Usuario responsable.
+- Fecha y hora.
+- Operación ejecutada.
+- Servicio origen.
+- Recurso afectado.
+- Resultado de la operación.
+- Correlation ID.
+
+Los registros serán de solo escritura (append-only) y no podrán modificarse posteriormente.
+
+---
+
+# Observabilidad
+
+La plataforma incorporará mecanismos para facilitar el monitoreo y diagnóstico de los servicios.
+
+## Logging
+
+Todos los servicios generarán logs estructurados y centralizados.
+
+## Métricas
+
+Se recopilarán indicadores como:
+
+- Uso de CPU.
+- Uso de memoria.
+- Tiempo de respuesta.
+- Latencia.
+- Número de errores.
+- Disponibilidad del servicio.
+
+## Trazabilidad distribuida
+
+Todas las solicitudes propagarán un **Correlation ID** para rastrear el flujo completo entre microservicios.
+
+---
+
+# Gestión de errores
+
+Todos los servicios implementarán un mecanismo uniforme para el manejo de excepciones.
+
+Las respuestas de error deberán contener información estandarizada.
+
+Ejemplo:
 
 ```json
 {
@@ -78,38 +102,72 @@ Formato:
 
 ---
 
-## Integración
+# Integración entre servicios
 
-### Sincrónica
+La comunicación entre microservicios podrá realizarse mediante dos mecanismos.
 
-REST API.
+## Comunicación síncrona
 
-### Asíncrona
+- APIs REST.
+- Contratos documentados mediante OpenAPI.
 
-Mensajería basada en eventos.
+## Comunicación asíncrona
 
-Eventos típicos:
+Mediante eventos publicados en el Message Broker.
 
-* UserCreated
-* InstructorAssigned
-* ScheduleCreated
-* ScheduleUpdated
+Ejemplos de eventos:
+
+- UserCreated
+- InstructorAssigned
+- ScheduleCreated
+- ScheduleUpdated
+- SessionCompleted
 
 ---
 
-## Calidad
+# Calidad
 
-### Pruebas
+Todos los componentes deberán cumplir los estándares definidos por el proyecto.
 
-* Unitarias.
-* Integración.
-* Contratos.
-* End-to-End.
+## Pruebas
 
-### Cobertura
+Se contemplan:
 
-Cobertura mínima: 80%.
+- Pruebas unitarias.
+- Pruebas de integración.
+- Pruebas de contratos.
+- Pruebas End-to-End.
 
-### Documentación
+## Cobertura
 
-Todas las APIs deberán documentarse mediante OpenAPI 3.0.
+Cobertura mínima esperada:
+
+- 80 % del código.
+
+## Documentación
+
+Todas las APIs deberán documentarse mediante OpenAPI 3.0 y mantenerse sincronizadas con su implementación.
+
+---
+
+# Principios transversales
+
+Toda la solución deberá cumplir los siguientes principios:
+
+- Seguridad por defecto.
+- Observabilidad desde el diseño.
+- Bajo acoplamiento entre servicios.
+- Alta cohesión por dominio.
+- Trazabilidad de extremo a extremo.
+- Database per Service.
+- API First.
+- Event-Driven Architecture.
+
+---
+
+# Referencias
+
+- [overview.md](./overview.md) — Vista general de arquitectura.
+- [deployment.md](./deployment.md) — Arquitectura de despliegue.
+- [../04-requirements/non-functional.md](../04-requirements/non-functional.md) — Requisitos no funcionales.
+- [../02-domain/domain-events/README.md](../02-domain/domain-events/README.md) — Eventos del dominio.

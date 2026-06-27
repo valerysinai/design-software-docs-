@@ -1,6 +1,6 @@
 # Requisitos
 
-> Estado: 🟡 Pendiente | Última actualización: 2026-06-22
+> Estado: 🟡 Pendiente | Última actualización: 2026-06-25
 > Autor: Por definir | Equipo: Por definir
 
 ## Contenido

@@ -1,7 +1,7 @@
 # Arquitectura
 
-> Estado: 🟢 En Completo | Última actualización: 2026-06-22
-> Autor: Por definir | Equipo: Arquitectura
+> Estado: 🟡 En progreso | Última actualización: 2026-06-25
+> Autor: Por definir | Equipo: Por definir
 
 ## Contenido
 

@@ -1,201 +1,33 @@
 # Historias de Usuario
 
-> Estado: 🟡 En progreso | Última actualización: 2026-06-22
+> Estado: 🟡 En progreso | Última actualización: 2026-06-25
 > Autor: Por definir | Equipo: Por definir
 
-## HU-001 Inicio de sesión
+## Propósito
+
+Este documento reúne las principales historias de usuario del Sistema de Gestión de Horarios del SENA. Las historias representan las necesidades de los diferentes actores de la plataforma y sirven como base para la implementación de los requerimientos funcionales.
+
+---
+
+# Gestión de Identidad y Acceso
+
+## HU-001 Iniciar sesión
 
 **Como** usuario autorizado
 
 **Quiero** acceder al sistema mediante mis credenciales
 
-**Para** utilizar las funcionalidades permitidas según mi perfil.
+**Para** utilizar únicamente las funcionalidades permitidas según mi perfil.
 
 ### Criterios de aceptación
 
-* Validar usuario y contraseña.
-* Mostrar mensaje de error ante credenciales inválidas.
-* Registrar el acceso exitoso.
+- Validar usuario y contraseña.
+- Mostrar mensaje ante credenciales inválidas.
+- Registrar el acceso exitoso.
 
 ---
 
-## HU-002 Gestionar ambientes
-
-**Como** administrador
-
-**Quiero** registrar y actualizar ambientes
-
-**Para** mantener actualizada la infraestructura disponible.
-
-### Criterios de aceptación
-
-* Crear ambientes.
-* Modificar información existente.
-* Consultar ambientes registrados.
-
----
-
-## HU-003 Programar horario
-
-**Como** coordinador académico
-
-**Quiero** asignar horarios a fichas e instructores
-
-**Para** organizar las actividades de formación.
-
-### Criterios de aceptación
-
-* Validar disponibilidad de instructor.
-* Validar disponibilidad de ambiente.
-* Detectar conflictos de programación.
-
----
-
-## HU-004 Registrar incidencia
-
-**Como** instructor
-
-**Quiero** registrar incidencias relacionadas con una sesión
-
-**Para** reportar novedades académicas.
-
-### Criterios de aceptación
-
-* Registrar fecha y descripción.
-* Asociar la incidencia al horario correspondiente.
-* Permitir consulta posterior.
-
----
-
-## HU-005 Consultar seguimiento de proyecto
-
-**Como** directivo
-
-**Quiero** visualizar el avance de proyectos formativos
-
-**Para** monitorear el cumplimiento de objetivos.
-
-### Criterios de aceptación
-
-* Consultar estado actual.
-* Visualizar avances registrados.
-* Mostrar observaciones asociadas.
-
----
-
-## HU-006 Gestionar programas de formación
-
-**Como** administrador académico
-
-**Quiero** registrar y actualizar programas de formación
-
-**Para** mantener actualizada la oferta educativa institucional.
-
-### Criterios de aceptación
-
-* Crear programas de formación.
-* Modificar información existente.
-* Consultar programas registrados.
-
----
-
-## HU-007 Gestionar competencias
-
-**Como** diseñador curricular
-
-**Quiero** administrar competencias
-
-**Para** estructurar adecuadamente los programas de formación.
-
-### Criterios de aceptación
-
-* Crear competencias.
-* Modificar competencias existentes.
-* Asociar competencias a programas.
-
----
-
-## HU-008 Gestionar resultados de aprendizaje
-
-**Como** diseñador curricular
-
-**Quiero** administrar resultados de aprendizaje
-
-**Para** definir los resultados esperados de cada competencia.
-
-### Criterios de aceptación
-
-* Crear resultados de aprendizaje.
-* Actualizar resultados existentes.
-* Asociarlos a competencias.
-
----
-
-## HU-009 Registrar fichas
-
-**Como** coordinador académico
-
-**Quiero** crear fichas de formación
-
-**Para** planificar la ejecución académica.
-
-### Criterios de aceptación
-
-* Crear fichas.
-* Asociar programa de formación.
-* Consultar fichas registradas.
-
----
-
-## HU-010 Asignar instructores
-
-**Como** coordinador académico
-
-**Quiero** asignar instructores a fichas y competencias
-
-**Para** garantizar la ejecución de la formación.
-
-### Criterios de aceptación
-
-* Consultar disponibilidad del instructor.
-* Asociar instructor a ficha.
-* Validar conflictos de asignación.
-
----
-
-## HU-011 Consultar horario
-
-**Como** aprendiz
-
-**Quiero** visualizar mi horario
-
-**Para** conocer mis actividades programadas.
-
-### Criterios de aceptación
-
-* Consultar horario vigente.
-* Visualizar instructor asignado.
-* Visualizar ambiente asignado.
-
----
-
-## HU-012 Aprobar programación académica
-
-**Como** coordinador académico
-
-**Quiero** aprobar los horarios generados
-
-**Para** publicarlos oficialmente.
-
-### Criterios de aceptación
-
-* Revisar programación generada.
-* Aprobar programación.
-* Registrar fecha y usuario responsable.
-
----
-
-## HU-013 Gestionar usuarios
+## HU-002 Gestionar usuarios
 
 **Como** administrador del sistema
 
@@ -205,29 +37,234 @@
 
 ### Criterios de aceptación
 
-* Crear usuarios.
-* Asignar roles.
-* Desactivar usuarios.
+- Crear usuarios.
+- Modificar usuarios.
+- Desactivar usuarios.
+- Asignar roles.
 
 ---
 
-## HU-014 Gestionar permisos
+# Gestión Académica
 
-**Como** administrador del sistema
+## HU-003 Gestionar programas de formación
 
-**Quiero** configurar permisos por rol
+**Como** administrador académico
 
-**Para** garantizar acceso controlado a los recursos.
+**Quiero** administrar programas de formación
+
+**Para** mantener actualizada la oferta académica.
 
 ### Criterios de aceptación
 
-* Asignar permisos.
-* Modificar permisos.
-* Consultar configuración vigente.
+- Registrar programas.
+- Actualizar programas.
+- Consultar programas.
 
 ---
 
-## HU-015 Generar reportes
+## HU-004 Gestionar competencias y RAP
+
+**Como** diseñador curricular
+
+**Quiero** administrar competencias y resultados de aprendizaje
+
+**Para** estructurar correctamente los programas de formación.
+
+### Criterios de aceptación
+
+- Crear competencias.
+- Crear RAP.
+- Asociarlos al programa.
+
+---
+
+## HU-005 Gestionar fichas
+
+**Como** coordinador académico
+
+**Quiero** crear y administrar fichas de formación
+
+**Para** organizar la ejecución académica.
+
+### Criterios de aceptación
+
+- Crear fichas.
+- Asociar programas.
+- Consultar fichas.
+
+---
+
+# Gestión de Ambientes
+
+## HU-006 Gestionar ambientes
+
+**Como** administrador
+
+**Quiero** registrar y actualizar ambientes
+
+**Para** mantener disponible la infraestructura institucional.
+
+### Criterios de aceptación
+
+- Crear ambientes.
+- Actualizar ambientes.
+- Consultar ambientes.
+
+---
+
+# Gestión de Actores
+
+## HU-007 Asignar instructores
+
+**Como** coordinador académico
+
+**Quiero** asignar instructores a las fichas
+
+**Para** garantizar la ejecución de la formación.
+
+### Criterios de aceptación
+
+- Consultar disponibilidad.
+- Asociar instructor.
+- Validar conflictos.
+
+---
+
+## HU-008 Consultar horario
+
+**Como** aprendiz
+
+**Quiero** consultar mi horario
+
+**Para** conocer mis actividades programadas.
+
+### Criterios de aceptación
+
+- Consultar horario.
+- Visualizar instructor.
+- Visualizar ambiente.
+
+---
+
+# Gestión de Horarios
+
+## HU-009 Programar horarios
+
+**Como** coordinador académico
+
+**Quiero** crear horarios
+
+**Para** organizar la programación académica.
+
+### Criterios de aceptación
+
+- Validar instructor.
+- Validar ambiente.
+- Detectar conflictos.
+
+---
+
+## HU-010 Aprobar programación
+
+**Como** coordinador académico
+
+**Quiero** aprobar los horarios generados
+
+**Para** publicarlos oficialmente.
+
+### Criterios de aceptación
+
+- Revisar programación.
+- Aprobar horarios.
+- Registrar responsable.
+
+---
+
+## HU-011 Registrar incidencias
+
+**Como** instructor
+
+**Quiero** registrar novedades durante una sesión
+
+**Para** mantener la trazabilidad de la ejecución.
+
+### Criterios de aceptación
+
+- Registrar incidencia.
+- Asociarla a la sesión.
+- Consultarla posteriormente.
+
+---
+
+# Seguimiento y Monitoreo
+
+## HU-012 Consultar indicadores
+
+**Como** directivo
+
+**Quiero** visualizar indicadores de gestión
+
+**Para** apoyar la toma de decisiones.
+
+### Criterios de aceptación
+
+- Consultar indicadores.
+- Aplicar filtros.
+- Visualizar tendencias.
+
+---
+
+## HU-013 Monitorear recursos
+
+**Como** coordinador académico
+
+**Quiero** conocer la ocupación de ambientes e instructores
+
+**Para** optimizar la programación.
+
+### Criterios de aceptación
+
+- Consultar ocupación.
+- Consultar disponibilidad.
+- Identificar sobrecargas.
+
+---
+
+## HU-014 Consultar seguimiento de proyectos
+
+**Como** directivo
+
+**Quiero** visualizar el avance de los proyectos formativos
+
+**Para** monitorear el cumplimiento de los objetivos.
+
+### Criterios de aceptación
+
+- Consultar estado.
+- Visualizar avances.
+- Consultar observaciones.
+
+---
+
+# Gestión Documental
+
+## HU-015 Gestionar documentos
+
+**Como** administrador académico
+
+**Quiero** almacenar y consultar documentos
+
+**Para** centralizar la información institucional.
+
+### Criterios de aceptación
+
+- Cargar documentos.
+- Consultarlos.
+- Gestionar versiones.
+
+---
+
+## HU-016 Generar reportes
 
 **Como** directivo
 
@@ -237,87 +274,50 @@
 
 ### Criterios de aceptación
 
-* Filtrar información.
-* Generar reportes.
-* Exportar resultados.
+- Filtrar información.
+- Generar reportes.
+- Exportar en PDF.
 
 ---
 
-## HU-016 Recibir notificaciones
+# Notificaciones
+
+## HU-017 Recibir notificaciones
 
 **Como** instructor o aprendiz
 
-**Quiero** recibir notificaciones de cambios en la programación
+**Quiero** recibir notificaciones de cambios
 
-**Para** mantenerme informado.
+**Para** mantenerme informado sobre la programación.
 
 ### Criterios de aceptación
 
-* Notificar cambios de horario.
-* Notificar cancelaciones.
-* Registrar envío de notificaciones.
+- Notificar cambios.
+- Notificar cancelaciones.
+- Registrar el envío.
 
 ---
 
-## HU-017 Consultar auditoría
+# Auditoría
+
+## HU-018 Consultar auditoría
 
 **Como** auditor institucional
 
-**Quiero** consultar registros de auditoría
+**Quiero** consultar el historial de operaciones
 
-**Para** verificar la trazabilidad de las operaciones.
+**Para** verificar la trazabilidad del sistema.
 
 ### Criterios de aceptación
 
-* Consultar eventos registrados.
-* Filtrar por usuario.
-* Filtrar por fecha.
+- Consultar eventos.
+- Filtrar por usuario.
+- Filtrar por fecha.
 
 ---
 
-## HU-018 Gestionar documentos
+# Referencias
 
-**Como** administrador académico
-
-**Quiero** almacenar y consultar documentos asociados
-
-**Para** centralizar la información institucional.
-
-### Criterios de aceptación
-
-* Cargar documentos.
-* Consultar documentos.
-* Gestionar versiones.
-
----
-
-## HU-019 Consultar indicadores
-
-**Como** directivo
-
-**Quiero** visualizar indicadores operativos y académicos
-
-**Para** monitorear el desempeño institucional.
-
-### Criterios de aceptación
-
-* Consultar indicadores.
-* Aplicar filtros.
-* Visualizar tendencias históricas.
-
----
-
-## HU-020 Monitorear recursos
-
-**Como** coordinador académico
-
-**Quiero** visualizar la ocupación de ambientes e instructores
-
-**Para** optimizar la asignación de recursos.
-
-### Criterios de aceptación
-
-* Consultar ocupación de ambientes.
-* Consultar carga de instructores.
-* Identificar disponibilidad.
-
+- [functional.md](./functional.md)
+- [non-functional.md](./non-functional.md)
+- [../03-product/product-backlog.md](../03-product/product-backlog.md)

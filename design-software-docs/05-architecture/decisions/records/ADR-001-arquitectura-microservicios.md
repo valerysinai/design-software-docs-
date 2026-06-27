@@ -1,64 +1,121 @@
 # ADR-001: Arquitectura basada en microservicios
 
-**Estado:** APPROVED
-**Fecha:** 2026-06-22
-**Autores:** Por definir
-**Equipos involucrados:** Arquitectura, Desarrollo, DevOps
+> Estado: 🟡 En progreso | Última actualización: 2026-06-25
+> Autor: Por definir
+> Equipo: Por definir
 
 ---
 
 ## Contexto
 
-El sistema Gestión de Horarios SENA debe soportar múltiples dominios funcionales como autenticación, gestión académica, programación de horarios, gestión de ambientes, auditoría y monitoreo.
+La plataforma **Gestión de Horarios SENA** integra múltiples dominios de negocio, entre ellos autenticación, gestión académica, programación de horarios, administración de ambientes, monitoreo, documentación y auditoría.
 
-Se requiere una arquitectura que permita la evolución independiente de los diferentes dominios, facilite el mantenimiento y soporte el crecimiento futuro de la plataforma.
+Debido a la diversidad de responsabilidades y al crecimiento esperado del sistema, se requiere una arquitectura que permita desarrollar, desplegar y escalar cada dominio de manera independiente, manteniendo un bajo acoplamiento entre los componentes.
+
+---
 
 ## Decisión
 
-Se decide adoptar una arquitectura basada en microservicios organizados por dominio de negocio.
+Se adopta una **arquitectura basada en microservicios**, organizada por dominios de negocio siguiendo principios de **Domain-Driven Design (DDD)**.
 
-Cada microservicio será responsable de su lógica de negocio, persistencia de datos y contratos de integración.
+Cada microservicio será responsable de:
 
-Los servicios identificados inicialmente son:
+- Su propia lógica de negocio.
+- Su base de datos (Database per Service).
+- Sus contratos de integración.
+- La publicación y consumo de eventos cuando sea necesario.
 
-* IAM Service
-* Academic Management Service
-* Actors Service
-* Training Environment Service
-* Scheduling Service
-* Reference Data Service
-* Document Service
-* Monitoring Service
-* Audit Service
+Los servicios definidos inicialmente son:
+
+- IAM Service
+- Academic Management Service
+- Actors Service
+- Training Environment Service
+- Scheduling Service
+- Reference Data Service
+- Monitoring Service
+- Document Service
+- Audit Service
+
+La comunicación entre servicios se realizará mediante APIs REST y eventos de dominio, dependiendo del tipo de integración requerida.
+
+---
 
 ## Consecuencias
 
 ### Positivas
 
-* Escalabilidad independiente por dominio.
-* Menor acoplamiento entre componentes.
-* Despliegues autónomos.
-* Mejor mantenibilidad.
+- Escalabilidad independiente de cada dominio.
+- Bajo acoplamiento entre servicios.
+- Despliegues independientes.
+- Mayor mantenibilidad.
+- Facilita la evolución futura de la plataforma.
 
 ### Negativas / Trade-offs
 
-* Mayor complejidad operativa.
-* Incremento de la necesidad de monitoreo y observabilidad.
-* Mayor complejidad en la integración de servicios.
+- Mayor complejidad en la infraestructura.
+- Incremento en la comunicación distribuida.
+- Mayor necesidad de monitoreo y observabilidad.
 
 ### Riesgos
 
-* Complejidad en la gestión de datos distribuidos.
-* Sobrecarga operativa si no existe automatización adecuada.
+- Consistencia de datos entre servicios.
+- Mayor complejidad en el diagnóstico de errores distribuidos.
+- Dependencia de una adecuada estrategia de integración.
+
+---
 
 ## Alternativas consideradas
 
-| Alternativa          | Por qué se descartó                                                           |
-| -------------------- | ----------------------------------------------------------------------------- |
-| Monolito tradicional | Limitaba la evolución independiente de módulos                                |
-| Monolito modular     | Adecuado para etapas tempranas pero insuficiente para el crecimiento esperado |
+| Alternativa | Motivo del descarte |
+|-------------|---------------------|
+| Monolito tradicional | Dificulta el crecimiento independiente de los módulos. |
+| Monolito modular | Reduce el acoplamiento, pero limita el despliegue y escalabilidad independiente. |
+| Arquitectura orientada a servicios (SOA) | Introduce mayor complejidad de integración para el alcance actual del proyecto. |
+
+---
+
+## Impacto arquitectónico
+
+### Componentes afectados
+
+- API Gateway
+- Todos los microservicios
+- Message Broker
+- Sistema de monitoreo
+
+### Servicios afectados
+
+- IAM Service
+- Academic Management Service
+- Actors Service
+- Training Environment Service
+- Scheduling Service
+- Reference Data Service
+- Monitoring Service
+- Document Service
+- Audit Service
+
+### Datos afectados
+
+Cada servicio mantiene la propiedad exclusiva de su información mediante el patrón **Database per Service**.
+
+---
+
+## Estado de implementación
+
+| Actividad | Estado |
+|-----------|--------|
+| Diseño | ☑ |
+| Desarrollo | ☐ |
+| Pruebas | ☐ |
+| Producción | ☐ |
+
+---
 
 ## Referencias
 
-* ../../overview.md
-* ../../cross-cutting.md
+- [../overview.md](../overview.md) — Vista general de arquitectura.
+- [../deployment.md](../deployment.md) — Arquitectura de despliegue.
+- [../cross-cutting.md](../cross-cutting.md) — Aspectos transversales.
+- [../../02-domain/domain-map.md](../../02-domain/domain-map.md) — Mapa del dominio.

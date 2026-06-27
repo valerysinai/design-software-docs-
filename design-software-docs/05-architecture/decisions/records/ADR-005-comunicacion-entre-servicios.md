@@ -1,64 +1,92 @@
 # ADR-005: Comunicación entre servicios
 
-**Estado:** APPROVED
-**Fecha:** 2026-06-24
-**Autores:** Por definir
-**Equipos involucrados:** Arquitectura, Desarrollo, DevOps
+> Estado: 🟡 En progreso | Última actualización: 2026-06-26
+> Autor: Por definir
+> Equipo: Arquitectura
 
 ---
 
 ## Contexto
 
-Los microservicios deben intercambiar información para ejecutar procesos académicos y administrativos.
+La arquitectura del sistema **Gestión de Horarios SENA** está basada en microservicios independientes que deben intercambiar información para soportar procesos académicos, administrativos y operativos.
 
-Algunas operaciones requieren respuestas inmediatas y otras pueden ejecutarse de forma asíncrona.
+Existen operaciones que requieren una respuesta inmediata, como la autenticación o la consulta de información, mientras que otras pueden ejecutarse de forma asíncrona sin afectar la experiencia del usuario, como la generación de documentos, las notificaciones, el monitoreo y la auditoría.
+
+Se requiere una estrategia de integración que reduzca el acoplamiento entre servicios, facilite la escalabilidad y mantenga la consistencia de la información.
+
+---
 
 ## Decisión
 
-Se decide utilizar una estrategia híbrida de integración:
+Se adopta una estrategia híbrida para la comunicación entre microservicios:
 
-* REST para comunicación sincrónica.
-* Eventos para comunicación asíncrona.
+- **APIs REST** para operaciones sincrónicas que requieren respuesta inmediata.
+- **Eventos de dominio** para procesos asíncronos y desacoplados.
 
-REST será utilizado para consultas y operaciones transaccionales.
+Las APIs REST serán utilizadas para consultas, validaciones y operaciones transaccionales.
 
-Los eventos serán utilizados para auditoría, monitoreo, notificaciones y sincronización de procesos.
+Los eventos serán utilizados para propagar cambios relevantes entre servicios, permitiendo la actualización de información, la generación de auditorías, el monitoreo del sistema y el envío de notificaciones.
 
-Eventos iniciales:
+Eventos principales del dominio:
 
-* UserCreated
-* UserUpdated
-* InstructorAssigned
-* ScheduleCreated
-* ScheduleUpdated
-* IncidentReported
+- UsuarioRegistrado
+- UsuarioDesactivado
+- FichaCreada
+- InstructorAsignado
+- HorarioProgramado
+- ConflictoDetectado
+- SesionFinalizada
+- DocumentoGenerado
+
+---
+
+## Impacto arquitectónico
+
+Esta decisión permite combinar la simplicidad de las APIs REST con la flexibilidad de una arquitectura orientada a eventos.
+
+Los servicios mantienen un bajo acoplamiento, ya que no dependen directamente de las bases de datos ni de la implementación interna de otros dominios.
+
+Toda comunicación deberá realizarse mediante contratos claramente definidos (API o eventos), evitando el acceso directo entre bases de datos de diferentes microservicios.
+
+---
 
 ## Consecuencias
 
 ### Positivas
 
-* Menor acoplamiento entre servicios.
-* Mayor escalabilidad.
-* Flexibilidad de integración.
+- Menor acoplamiento entre microservicios.
+- Mayor escalabilidad de la plataforma.
+- Mejor tolerancia a fallos.
+- Integración flexible entre dominios.
+- Facilita la auditoría y el monitoreo mediante eventos.
 
 ### Negativas / Trade-offs
 
-* Incremento de complejidad en la infraestructura.
-* Necesidad de administrar mensajería y eventos.
+- Incremento en la complejidad de la infraestructura.
+- Necesidad de administrar un sistema de mensajería.
+- Mayor esfuerzo para garantizar la consistencia eventual de los datos.
 
 ### Riesgos
 
-* Pérdida de eventos si no existen mecanismos de recuperación.
-* Consistencia eventual entre dominios.
+- Pérdida de eventos si no existen mecanismos de persistencia o reintento.
+- Duplicación temporal de información entre servicios.
+- Mayor complejidad para depurar flujos distribuidos.
+
+---
 
 ## Alternativas consideradas
 
-| Alternativa  | Por qué se descartó                   |
-| ------------ | ------------------------------------- |
-| Solo REST    | Incrementa el acoplamiento temporal   |
-| Solo eventos | No adecuado para consultas inmediatas |
+| Alternativa | Por qué se descartó |
+|-------------|---------------------|
+| Solo APIs REST | Genera mayor acoplamiento temporal entre servicios y afecta la escalabilidad. |
+| Solo eventos | No es adecuado para operaciones que requieren respuesta inmediata, como autenticación o consultas. |
+| Base de datos compartida | Rompe la independencia de los microservicios y aumenta el acoplamiento entre dominios. |
+
+---
 
 ## Referencias
 
-* ../../cross-cutting.md
-* ADR-001-arquitectura-microservicios.md
+- `../cross-cutting.md`
+- `ADR-001-microservices-architecture.md`
+- `ADR-004-database-per-service.md`
+- `../../02-domain/events/README.md`
