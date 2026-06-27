@@ -1,6 +1,6 @@
 # Contexto
 
-> Estado: 🟡 En proceso | Última actualización: 2026-06-16
+> Estado: 🟡 Pendiente | Última actualización: 2026-06-24
 > Autor: Por definir | Equipo: Por definir
 
 ## Contenido
