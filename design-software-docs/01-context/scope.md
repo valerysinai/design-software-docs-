@@ -1,63 +1,92 @@
 # Alcance del proyecto
 
-> Estado: 🟡 En progreso | Última actualización: 2026-06-22
-> Autor: Por definir | Equipo: Arquitectura / Gestión
+> Estado: 🟡 En progreso | Última actualización: 2026-06-24
+> Autor: Por definir | Equipo: Por definir
 
-## En alcance
+## Propósito
 
-1. Controlar horarios programados y ejecución real por ficha, instructor y ambiente.
-2. Registrar trazabilidad precisa de sesiones de formación (asistencia, novedades, incidencias).
-3. Gestionar avance de fichas y aprendices en tiempo real.
-4. Relacionar proyectos formativos con programas, diseño curricular, competencias, RAPs, evidencias y entregables.
-5. Identificar dependencias entre proyectos formativos.
-6. Detectar y registrar conflictos de asignación (solapamiento de instructor o ambiente).
-7. Proveer motor de asignación automática basado en restricciones.
-8. Generar reportes, actas y documentos PDF mediante worker asincrónico.
-9. Enviar notificaciones y alertas a instructores, coordinadores y directivos.
-10. Exponer eventos de dominio y contratos por microservicio.
-11. Proveer tablero runtime de avance y desviaciones (KPIs).
-12. Auditoría append-only completa de todas las operaciones con retención mínima de 7 años.
-13. Gestionar datos de referencia: centros, regiones, parámetros, catálogos.
-14. Sincronización con fuentes maestras externas sin reemplazarlas.
+Este documento define el alcance funcional del **Sistema de Gestión de Horarios del SENA**, especificando las funcionalidades incluidas, las exclusiones del proyecto, así como los supuestos y restricciones bajo los cuales será desarrollado e implementado.
 
-## Fuera de alcance
+---
 
-1. **No reemplazar SOFIA Plus** ni crear fuente maestra institucional sin autorización explícita.
-2. Gestión de nóminas o contratos de instructores.
-3. Evaluación y calificaciones de aprendices (sistema de notas).
-4. Plataforma de aprendizaje virtual (LMS).
-5. Registro y control de asistencia biométrica.
-6. Integración con sistemas financieros o presupuestales.
-7. Gestión de eventos externos (seminarios, conferencias fuera del plan de formación).
-8. Exportación a formatos propietarios de terceros (SAP, Oracle, etc.).
-9. Mezcla de horarios, evidencias, proyectos, aprendices y diseño curricular en un solo servicio.
-10. Uso de prompts como mecanismo principal de seguridad.
-11. Acciones destructivas sin políticas y aprobación explícita.
+# En alcance
 
-## Supuestos
+El sistema contempla las siguientes funcionalidades:
 
-- Existen instructores y ambientes registrados previamente en el sistema.
-- Las fichas de formación siguen un calendario académico definido por el SENA.
-- Los usuarios tienen acceso a navegadores web modernos con conectividad estable.
-- Los datos de entrada (competencias, RAPs, disponibilidades) son validados antes del ingreso.
-- La capacidad computacional disponible es suficiente para cálculos de asignación en tiempo real.
+1. Gestionar la programación de horarios para fichas de formación, instructores y ambientes.
+2. Registrar la ejecución real de las sesiones de formación, incluyendo asistencia, novedades e incidencias.
+3. Realizar seguimiento al avance de fichas y aprendices durante el proceso formativo.
+4. Administrar la relación entre programas de formación, diseños curriculares, competencias, resultados de aprendizaje (RAP), proyectos formativos y evidencias.
+5. Gestionar proyectos formativos y sus dependencias.
+6. Detectar automáticamente conflictos de programación entre instructores, ambientes y horarios.
+7. Automatizar la asignación de horarios considerando restricciones de disponibilidad, capacidad y reglas del negocio.
+8. Generar reportes, actas y documentos institucionales.
+9. Enviar notificaciones y alertas relacionadas con cambios, conflictos y eventos relevantes.
+10. Proporcionar indicadores (KPIs) y tableros de seguimiento para apoyar la toma de decisiones.
+11. Gestionar información de referencia como centros de formación, regionales, jornadas, ambientes y parámetros del sistema.
+12. Mantener trazabilidad de las operaciones realizadas sobre la programación académica.
+13. Integrarse con sistemas institucionales mediante procesos de sincronización de información.
 
-## Restricciones
+---
 
-| Tipo | Restricción |
-|------|-------------|
-| Regulatoria | Cumplimiento con normativas internas del SENA sobre gobernanza de datos y Ley 1581 de 2012 |
-| Técnica | Tiempo de respuesta del motor de asignación < 5 segundos para fichas típicas |
-| Operacional | Las asignaciones no pueden cambiar sin autorización explícita del director de centro |
-| Seguridad | Auditoría append-only: no se puede modificar un registro una vez creado |
-| Datos | Retención mínima de 7 años para registros de auditoría |
-| Acceso | Control de acceso basado en roles: DIRECTOR, COORDINADOR, INSTRUCTOR, APRENDIZ, ADMIN |
-| Arquitectura | Cada microservicio tiene su propia base de datos (Database per Service Pattern) |
-| Integración | Acceso entre microservicios solo vía API, evento o contrato explícito; no joins cross-BD |
+# Fuera de alcance
 
-## Referencias
+El proyecto no contempla las siguientes funcionalidades:
 
-- [01-context/overview.md](./overview.md) — Contexto general y objetivos
-- [04-requirements/functional.md](../04-requirements/functional.md) — Requerimientos funcionales
-- [04-requirements/non-functional.md](../04-requirements/non-functional.md) — Requerimientos no funcionales
-- [05-architecture/decisions/records/ADR-001-no-sofia-plus-replacement.md](../05-architecture/decisions/records/ADR-001-no-sofia-plus-replacement.md)
+1. Reemplazar las funciones administrativas de **SOFIA Plus** ni convertirse en la fuente maestra de información institucional.
+2. Gestionar procesos de nómina, contratación o administración laboral de instructores.
+3. Administrar calificaciones o procesos oficiales de evaluación académica.
+4. Implementar una plataforma de aprendizaje virtual (LMS).
+5. Gestionar sistemas biométricos de control de asistencia.
+6. Integrarse con plataformas financieras, contables o presupuestales.
+7. Administrar eventos externos ajenos al proceso académico del SENA.
+8. Desarrollar integraciones específicas con software propietario de terceros que no formen parte de los requerimientos del proyecto.
+9. Sustituir los procesos oficiales de administración curricular definidos por la institución.
+
+---
+
+# Supuestos
+
+Para el correcto funcionamiento del sistema se asume que:
+
+* Los instructores, ambientes, fichas y programas de formación existen previamente en las fuentes institucionales correspondientes.
+* La programación académica sigue el calendario oficial definido por el SENA.
+* Los usuarios cuentan con acceso a navegadores web modernos y conexión estable a la red.
+* La información sincronizada desde los sistemas institucionales es confiable y se encuentra previamente validada.
+* La infraestructura tecnológica disponible soporta la ejecución de los procesos de programación y consulta en tiempo real.
+
+---
+
+# Restricciones
+
+| Tipo           | Restricción                                                                                                                                                     |
+| -------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Regulatoria    | Cumplimiento de la normativa institucional del SENA y de la legislación colombiana aplicable en materia de protección de datos personales y gestión documental. |
+| Operacional    | Los cambios en la programación deben respetar los flujos de aprobación establecidos por la institución.                                                         |
+| Seguridad      | El acceso a la información se controla mediante autenticación, autorización y gestión de roles.                                                                 |
+| Datos          | La información académica y de auditoría debe conservarse conforme a las políticas institucionales de retención documental.                                      |
+| Disponibilidad | El sistema debe garantizar disponibilidad para apoyar la operación académica durante los periodos de formación.                                                 |
+| Integración    | La comunicación con sistemas externos se realizará mediante mecanismos de integración definidos por la arquitectura del proyecto.                               |
+
+---
+
+# Exclusiones arquitectónicas
+
+Las siguientes decisiones corresponden a la arquitectura del sistema y se documentan en otras secciones del repositorio:
+
+* Arquitectura basada en microservicios.
+* Estrategia **Database per Service**.
+* Catálogo de eventos de dominio.
+* Contratos de APIs.
+* Estrategia de auditoría y trazabilidad.
+* Patrones de integración entre servicios.
+
+---
+
+# Referencias
+
+* [01-context/overview.md](./overview.md) — Descripción general del proyecto.
+* [01-context/glossary.md](./glossary.md) — Definiciones del lenguaje ubicuo.
+* [04-requirements/functional.md](../04-requirements/functional.md) — Requerimientos funcionales.
+* [04-requirements/non-functional.md](../04-requirements/non-functional.md) — Requerimientos no funcionales.
+* [05-architecture/overview.md](../05-architecture/overview.md) — Arquitectura general del sistema.
