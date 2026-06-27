@@ -1,33 +1,70 @@
 # UML
 
-> Estado: 🔴 Pendiente | Última actualización: 2026-06-16
-> Autor: Por definir | Equipo: Por definir
+> Estado: 🟡 En progreso | Última actualización: 2026-06-25
+> Autor: Por definir | Equipo: Arquitectura
 
-Repositorio de diagramas UML y arquitectura visual. Todo diagrama debe tener fuente editable y exportación revisable.
+## Contenido
+
+Esta carpeta reúne los diagramas UML utilizados para documentar la arquitectura, los procesos y el diseño del sistema **Gestión de Horarios SENA**.
+
+Cada diagrama debe contar con un archivo fuente editable y una versión exportada para facilitar su consulta durante el desarrollo y mantenimiento del proyecto.
+
+---
 
 ## Convenciones
 
-- Fuentes en `diagrams/source/` con extensión `.wsd` o `.puml`
-- Exportaciones en `diagrams/exports/` con formato `.svg` preferido
-- Nombre de archivo: `<dominio>-<tipo>.<ext>` (ej: `horario-sequence.wsd`)
-- Todo diagrama debe registrarse en [diagram-index.md](./diagram-index.md)
+- Los archivos fuente se almacenan en `diagrams/source/`.
+- Las exportaciones se almacenan en `diagrams/exports/`.
+- Se recomienda utilizar formato **PlantUML (.puml)** para las fuentes.
+- Las exportaciones deben generarse preferiblemente en formato **SVG**.
+- Los nombres de los archivos seguirán la convención:
 
-## Tipos de diagrama
+```text
+<dominio>-<tipo>.<ext>
+```
 
-| Tipo | Archivo fuente |
-|------|---------------|
-| Casos de uso | `*-use-case.wsd` |
-| Clases | `*-class.wsd` |
-| Secuencia | `*-sequence.wsd` |
-| Actividad | `*-activity.wsd` |
-| Estado | `*-state.wsd` |
-| Componentes | `*-component.wsd` |
-| Despliegue | `*-deployment.wsd` |
+Ejemplos:
 
-## Archivos
+```text
+scheduling-use-case.puml
+actors-class.puml
+environment-sequence.puml
+deployment-component.puml
+```
 
-| Archivo | Descripción | Estado |
+Todos los diagramas deberán registrarse en `diagram-index.md`.
+
+---
+
+## Tipos de diagramas
+
+| Tipo | Descripción |
+|------|-------------|
+| Casos de uso | Interacción entre actores y funcionalidades del sistema |
+| Clases | Modelo estático de entidades y relaciones |
+| Secuencia | Interacción entre componentes durante un proceso |
+| Actividad | Flujo de ejecución de procesos |
+| Estado | Cambios de estado de una entidad |
+| Componentes | Organización de los microservicios y dependencias |
+| Despliegue | Infraestructura y distribución física de los servicios |
+
+---
+
+## Estructura
+
+| Carpeta | Descripción | Estado |
 |---------|-------------|--------|
-| [diagram-index.md](./diagram-index.md) | Índice de fuentes y exportaciones de diagramas | 🔴 |
-| [diagrams/source/](./diagrams/source/) | Fuentes editables de diagramas | 🔴 |
-| [diagrams/exports/](./diagrams/exports/) | Exportaciones SVG o PNG | 🔴 |
+| [diagram-index.md](./diagram-index.md) | Inventario de diagramas UML | 🟡 |
+| [diagrams/source/](./diagrams/source/) | Archivos fuente editables (.puml o .wsd) | 🟡 |
+| [diagrams/exports/](./diagrams/exports/) | Diagramas exportados (.svg o .png) | 🟡 |
+
+---
+
+## Relación con otras carpetas
+
+- **02-domain:** diagramas del modelo de dominio.
+- **03-product:** diagramas de procesos funcionales.
+- **05-architecture:** diagramas de componentes y despliegue.
+- **09-microservices:** diagramas específicos de cada servicio.
+
+Los diagramas deben mantenerse sincronizados con la documentación funcional y arquitectónica del proyecto.
