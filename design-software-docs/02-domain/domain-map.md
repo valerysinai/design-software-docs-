@@ -1,19 +1,21 @@
 # Mapa del dominio
 
-> Estado: 🟡 En progreso | Última actualización: 2026-06-22
-> Autor: Por definir | Equipo: Arquitectura / Gestión
+> Estado: 🟡 En progreso | Última actualización: 2026-06-24
+> Autor: Por definir | Equipo: Por definir
 
 ## Visión general de los contextos de negocio
 
-La plataforma **Horarios SENA** está organizada en diferentes contextos de dominio, cada uno responsable de un conjunto específico de procesos y reglas de negocio. Esta división permite mantener una separación clara de responsabilidades y facilita la evolución de la arquitectura basada en microservicios.
+El **Sistema de Gestión de Horarios del SENA** está organizado en diferentes **contextos acotados (Bounded Contexts)**, cada uno responsable de un conjunto específico de procesos, reglas de negocio y entidades del dominio. Esta separación permite mantener un lenguaje ubicuo consistente, reducir el acoplamiento entre componentes y facilitar la evolución de la arquitectura basada en microservicios.
+
+Cada contexto posee autonomía sobre sus datos y lógica de negocio, interactuando con los demás únicamente mediante contratos bien definidos, APIs o eventos de dominio.
 
 ---
 
-## Contextos principales
+# Contextos principales
 
-### 1. Gestión de Identidad y Acceso
+## 1. Gestión de Identidad y Acceso
 
-**Propósito:** Administrar la autenticación de usuarios, el control de acceso y la gestión de permisos dentro de la plataforma.
+**Propósito:** Administrar la autenticación, autorización y gestión de identidades de los usuarios que interactúan con la plataforma.
 
 **Entidades principales:**
 
@@ -23,7 +25,7 @@ La plataforma **Horarios SENA** está organizada en diferentes contextos de domi
 * Sesión
 * Token de acceso
 
-**Términos frecuentes:**
+**Lenguaje ubicuo:**
 
 * Inicio de sesión
 * Autenticación
@@ -33,9 +35,9 @@ La plataforma **Horarios SENA** está organizada en diferentes contextos de domi
 
 ---
 
-### 2. Información Institucional
+## 2. Información Institucional
 
-**Propósito:** Centralizar los datos organizacionales y parámetros compartidos por todos los módulos.
+**Propósito:** Administrar la información institucional compartida utilizada por los diferentes módulos del sistema.
 
 **Entidades principales:**
 
@@ -45,7 +47,7 @@ La plataforma **Horarios SENA** está organizada en diferentes contextos de domi
 * Parámetro
 * Catálogo
 
-**Términos frecuentes:**
+**Lenguaje ubicuo:**
 
 * Regional
 * Centro
@@ -55,9 +57,9 @@ La plataforma **Horarios SENA** está organizada en diferentes contextos de domi
 
 ---
 
-### 3. Gestión de Ambientes
+## 3. Gestión de Ambientes
 
-**Propósito:** Administrar los espacios físicos destinados al desarrollo de las actividades formativas.
+**Propósito:** Gestionar los ambientes de formación y los recursos físicos requeridos para el desarrollo de las actividades académicas.
 
 **Entidades principales:**
 
@@ -67,7 +69,7 @@ La plataforma **Horarios SENA** está organizada en diferentes contextos de domi
 * Reserva
 * Mantenimiento
 
-**Términos frecuentes:**
+**Lenguaje ubicuo:**
 
 * Aula
 * Laboratorio
@@ -77,9 +79,9 @@ La plataforma **Horarios SENA** está organizada en diferentes contextos de domi
 
 ---
 
-### 4. Gestión Académica
+## 4. Gestión Académica
 
-**Propósito:** Controlar la estructura curricular y la organización de los procesos formativos.
+**Propósito:** Administrar la estructura académica que soporta el proceso formativo, incluyendo programas, fichas de formación, competencias y resultados de aprendizaje.
 
 **Entidades principales:**
 
@@ -89,19 +91,19 @@ La plataforma **Horarios SENA** está organizada en diferentes contextos de domi
 * Ficha
 * Oferta Formativa
 
-**Términos frecuentes:**
+**Lenguaje ubicuo:**
 
 * Competencia
 * Resultado de aprendizaje
 * Programa
 * Ficha
-* Currículo
+* Diseño curricular
 
 ---
 
-### 5. Gestión de Actores
+## 5. Gestión de Actores
 
-**Propósito:** Administrar la información de las personas involucradas en el proceso de formación.
+**Propósito:** Administrar la información de las personas y organizaciones que participan en el proceso de formación.
 
 **Entidades principales:**
 
@@ -109,21 +111,20 @@ La plataforma **Horarios SENA** está organizada en diferentes contextos de domi
 * Aprendiz
 * Empresa
 * Etapa Productiva
-* Seguimiento
 
-**Términos frecuentes:**
+**Lenguaje ubicuo:**
 
 * Instructor
 * Aprendiz
 * Empresa
 * Práctica
-* Seguimiento
+* Formación
 
 ---
 
-### 6. Gestión de Horarios
+## 6. Gestión de Horarios (**Core Domain**)
 
-**Propósito:** Coordinar la programación académica y validar la disponibilidad de recursos involucrados.
+**Propósito:** Coordinar la programación académica, validar restricciones y gestionar la asignación de recursos necesarios para cada sesión de formación.
 
 **Entidades principales:**
 
@@ -133,7 +134,7 @@ La plataforma **Horarios SENA** está organizada en diferentes contextos de domi
 * Asignación
 * Conflicto
 
-**Términos frecuentes:**
+**Lenguaje ubicuo:**
 
 * Programación
 * Agenda
@@ -141,23 +142,23 @@ La plataforma **Horarios SENA** está organizada en diferentes contextos de domi
 * Asignación
 * Conflicto
 
-> Este contexto constituye el núcleo funcional del sistema, ya que articula la información proveniente de los demás dominios.
+> Este contexto constituye el **núcleo funcional (Core Domain)** del sistema, ya que concentra la lógica principal relacionada con la programación académica y coordina la interacción con los demás contextos.
 
 ---
 
-### 7. Seguimiento y Monitoreo
+## 7. Seguimiento y Monitoreo
 
-**Propósito:** Supervisar indicadores de gestión, generar alertas y brindar apoyo a la toma de decisiones.
+**Propósito:** Supervisar la operación del sistema mediante indicadores, alertas y mecanismos de seguimiento que apoyen la toma de decisiones.
 
 **Entidades principales:**
 
 * Indicador
+* KPI
+* Dashboard
 * Alerta
 * Notificación
-* Seguimiento
-* Plan de Mejoramiento
 
-**Términos frecuentes:**
+**Lenguaje ubicuo:**
 
 * KPI
 * Métrica
@@ -167,9 +168,9 @@ La plataforma **Horarios SENA** está organizada en diferentes contextos de domi
 
 ---
 
-### 8. Gestión Documental
+## 8. Gestión Documental
 
-**Propósito:** Administrar la creación, almacenamiento y consulta de documentos generados por la plataforma.
+**Propósito:** Administrar la creación, generación, almacenamiento y consulta de documentos asociados al proceso formativo.
 
 **Entidades principales:**
 
@@ -178,7 +179,7 @@ La plataforma **Horarios SENA** está organizada en diferentes contextos de domi
 * Versión
 * Evidencia
 
-**Términos frecuentes:**
+**Lenguaje ubicuo:**
 
 * Reporte
 * Acta
@@ -190,9 +191,9 @@ La plataforma **Horarios SENA** está organizada en diferentes contextos de domi
 
 ---
 
-### 9. Auditoría y Trazabilidad
+## 9. Auditoría y Trazabilidad
 
-**Propósito:** Mantener el historial completo de acciones ejecutadas dentro del sistema.
+**Propósito:** Registrar de forma inmutable las operaciones realizadas dentro de la plataforma para garantizar trazabilidad y cumplimiento.
 
 **Entidades principales:**
 
@@ -200,79 +201,74 @@ La plataforma **Horarios SENA** está organizada en diferentes contextos de domi
 * Evento
 * Historial
 
-**Términos frecuentes:**
+**Lenguaje ubicuo:**
 
 * Trazabilidad
 * Evidencia
 * Registro
-* Seguimiento
 * Auditoría
+* Historial
 
 **Naturaleza:** Contexto transversal.
 
 ---
 
-## Relación entre contextos
+# Relación entre contextos
 
 ```text
-┌────────────────────────────────────────────┐
-│        GESTIÓN DE HORARIOS (CORE)          │
-│  Horarios • Sesiones • Asignaciones        │
-└───────────────┬───────────────┬────────────┘
-                │               │
-                │               │
-         Consulta        Utiliza recursos
-                │               │
-      ┌─────────▼───┐   ┌───────▼────────┐
-      │ GESTIÓN     │   │ GESTIÓN DE     │
-      │ ACADÉMICA   │   │ AMBIENTES      │
-      └──────┬──────┘   └───────┬────────┘
-             │                  │
-             └──────┬───────────┘
-                    │
-            ┌───────▼────────┐
-            │ GESTIÓN DE     │
-            │ ACTORES        │
-            └───────┬────────┘
-                    │
-            ┌───────▼────────┐
-            │ INFORMACIÓN    │
-            │ INSTITUCIONAL  │
-            └───────┬────────┘
-                    │
-            ┌───────▼────────┐
-            │ IDENTIDAD Y    │
-            │ ACCESO         │
-            └───────┬────────┘
-                    │
-      ┌─────────────┴─────────────┐
-      │ DOCUMENTOS • AUDITORÍA    │
-      │      (Transversal)        │
-      └─────────────┬─────────────┘
-                    │
-            ┌───────▼────────┐
-            │ MONITOREO Y    │
-            │ SEGUIMIENTO    │
-            └────────────────┘
+                    ┌───────────────────────────────┐
+                    │   GESTIÓN DE HORARIOS         │
+                    │        (CORE DOMAIN)          │
+                    └──────────────┬────────────────┘
+                                   │
+                 Consume información del dominio
+                                   │
+        ┌──────────────┬───────────┼──────────────┐
+        │              │           │              │
+        ▼              ▼           ▼              ▼
+ GESTIÓN         GESTIÓN      GESTIÓN      INFORMACIÓN
+ ACADÉMICA      ACTORES      AMBIENTES    INSTITUCIONAL
+
+                                   │
+                                   ▼
+                     IDENTIDAD Y ACCESO (IAM)
+                     Autenticación y autorización
+
+          DOCUMENTAL ─────────────── AUDITORÍA
+                  │                       │
+                  └──────────┬────────────┘
+                             ▼
+                  SEGUIMIENTO Y MONITOREO
+                  Consume eventos del dominio
 ```
 
 ---
 
-## Principios de interacción
+# Principios de interacción
 
-1. Cada contexto mantiene autonomía sobre sus datos y reglas de negocio.
-2. La comunicación entre dominios debe realizarse mediante APIs o eventos definidos explícitamente.
-3. El contexto de Gestión de Horarios concentra la lógica principal relacionada con la programación académica.
-4. Los módulos de Identidad y Acceso proporcionan los mecanismos de autenticación y autorización para toda la plataforma.
-5. Auditoría y Gestión Documental funcionan como servicios transversales que apoyan a los demás contextos.
-6. El módulo de Monitoreo consume eventos generados por distintos contextos para calcular indicadores y generar alertas operativas.
-7. Ningún contexto debe acceder directamente a la base de datos de otro servicio.
-8. Toda interacción crítica debe ser trazable mediante mecanismos de auditoría y registro de eventos.
+1. Cada contexto mantiene la propiedad exclusiva de sus datos y reglas de negocio.
+2. La comunicación entre contextos se realiza mediante contratos API o eventos de dominio claramente definidos.
+3. El contexto **Gestión de Horarios** constituye el **Core Domain** y coordina el proceso de programación académica.
+4. El contexto **Gestión de Identidad y Acceso** proporciona los mecanismos de autenticación y autorización utilizados por toda la plataforma.
+5. **Gestión Documental** y **Auditoría** son contextos transversales que prestan servicios al resto del sistema.
+6. **Seguimiento y Monitoreo** consume eventos publicados por otros contextos para generar indicadores y alertas.
+7. Ningún contexto accede directamente a la base de datos de otro contexto.
+8. Toda interacción relevante debe ser trazable mediante auditoría y mecanismos de correlación de eventos.
 
-## Consideraciones arquitectónicas
+---
 
-* Patrón aplicado: **Database per Service**.
-* Comunicación síncrona mediante APIs REST.
-* Comunicación asíncrona mediante eventos de dominio.
-* Trazabilidad distribuida mediante identificadores de correlación.
-* Separación de responsabilidades basada en principios de Domain-Driven Design (DDD).
+# Consideraciones arquitectónicas
+
+* Se aplica el patrón **Database per Service**, garantizando la autonomía de los datos de cada contexto.
+* La comunicación síncrona entre contextos se realiza mediante contratos API claramente definidos.
+* La integración asíncrona utiliza eventos de dominio para minimizar el acoplamiento entre servicios.
+* La trazabilidad distribuida se implementa mediante identificadores de correlación (**Correlation ID**).
+* La separación de responsabilidades sigue los principios de **Domain-Driven Design (DDD)**.
+
+---
+
+# Referencias
+
+* [entities-and-rules.md](./entities-and-rules.md) — Entidades, agregados y reglas de negocio.
+* [domain-events.md](./domain-events.md) — Eventos del dominio e interacciones entre contextos.
+* [../05-architecture/overview.md](../05-architecture/overview.md) — Arquitectura general del sistema.

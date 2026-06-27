@@ -1,244 +1,310 @@
 # Eventos del dominio
 
-> Estado: 🟡 En progreso | Última actualización: 2026-06-22
-> Autor: Por definir | Equipo: Arquitectura / Gestión
+> Estado: 🟡 En progreso | Última actualización: 2026-06-24
+> Autor: Por definir | Equipo: Por definir
 
-## Catálogo de eventos del sistema
+## Propósito
 
-Los eventos de dominio representan hechos relevantes ocurridos dentro de la plataforma. Estos eventos permiten la comunicación entre contextos de negocio y facilitan la trazabilidad, auditoría y automatización de procesos.
+Este documento describe los principales **eventos de dominio** generados por el Sistema de Gestión de Horarios del SENA.
+
+Los eventos representan hechos relevantes que ya ocurrieron dentro del negocio y permiten la comunicación entre los distintos contextos del dominio sin acoplamiento directo.
 
 ---
 
-## Contexto de Identidad y Acceso
+# Convenciones
 
-### RegistroUsuario
+Todos los eventos publicados por el sistema deben cumplir las siguientes características:
 
-**Descripción:** Se genera cuando un nuevo usuario es incorporado al sistema.
+| Característica | Descripción       |
+| -------------- | ----------------- |
+| Tipo           | Evento de dominio |
+| Identificador  | UUID              |
+| Fecha          | Timestamp UTC     |
+| Correlation ID | Obligatorio       |
+| Versionado     | Permitido         |
+| Estado         | Inmutable         |
 
-**Servicios interesados:**
+---
+
+# Catálogo de eventos
+
+## Gestión de Identidad y Acceso
+
+### UsuarioRegistrado
+
+**Descripción**
+
+Se publica cuando un nuevo usuario es creado dentro de la plataforma.
+
+**Contexto publicador**
+
+* Gestión de Identidad y Acceso
+
+**Contextos consumidores**
 
 * Auditoría
-* Notificaciones
+* Seguimiento y Monitoreo
 
-**Información transmitida:**
+**Información principal**
 
-* Identificador del usuario
+* Id del usuario
 * Correo electrónico
-* Perfil asignado
+* Rol asignado
 * Fecha de creación
 
-### DesactivacionUsuario
+---
 
-**Descripción:** Ocurre cuando un administrador inhabilita una cuenta.
+### UsuarioDesactivado
 
-**Servicios interesados:**
+**Descripción**
 
+Se publica cuando un usuario es deshabilitado.
+
+**Consumidores**
+
+* Auditoría
 * Gestión de Horarios
-* Auditoría
-* Notificaciones
+* Seguimiento y Monitoreo
 
-**Información transmitida:**
+**Información principal**
 
-* Usuario afectado
-* Motivo de desactivación
-* Fecha del cambio
-
-### AccesoAutorizado
-
-**Descripción:** Se registra después de una autenticación exitosa.
-
-**Servicios interesados:**
-
-* Auditoría
-* Monitoreo
-
-**Información transmitida:**
-
-* Usuario autenticado
-* Dirección IP
-* Fecha y hora de acceso
+* Usuario
+* Motivo
+* Fecha
 
 ---
 
-## Contexto de Configuración y Parámetros
+### UsuarioAutenticado
+
+**Descripción**
+
+Se genera después de una autenticación exitosa.
+
+**Consumidores**
+
+* Auditoría
+* Seguimiento y Monitoreo
+
+**Información principal**
+
+* Usuario
+* Dirección IP
+* Fecha
+* Correlation ID
+
+---
+
+# Información Institucional
 
 ### ConfiguracionActualizada
 
-**Descripción:** Indica la modificación de un parámetro utilizado por el sistema.
+**Descripción**
 
-**Servicios interesados:**
+Se publica cuando cambia un parámetro institucional.
 
-* Auditoría
+**Consumidores**
+
 * Gestión de Horarios
+* Auditoría
 
-**Información transmitida:**
+**Información principal**
 
-* Identificador del parámetro
+* Parámetro
 * Valor anterior
 * Nuevo valor
 
 ---
 
-## Contexto Académico
+# Gestión Académica
 
-### CreacionFichaFormacion
+### FichaCreada
 
-**Descripción:** Se produce al registrar una nueva ficha de formación.
+**Descripción**
 
-**Servicios interesados:**
+Se genera al registrar una nueva ficha de formación.
+
+**Consumidores**
 
 * Gestión de Horarios
 * Auditoría
-* Notificaciones
+* Gestión Documental
 
-**Información transmitida:**
+**Información principal**
 
-* Código de ficha
-* Programa asociado
-* Centro de formación
+* Código
+* Programa
+* Centro
 * Jornada
-* Coordinador responsable
-
-### ActualizacionFichaFormacion
-
-**Descripción:** Notifica cambios realizados sobre una ficha existente.
-
-**Servicios interesados:**
-
-* Auditoría
-* Gestión de Horarios
-* Notificaciones
-
-**Información transmitida:**
-
-* Identificador de ficha
-* Detalle de modificaciones realizadas
-
-### CierreFichaFormacion
-
-**Descripción:** Se genera cuando una ficha culmina su ciclo formativo.
-
-**Servicios interesados:**
-
-* Documentación
-* Monitoreo
-* Auditoría
-
-**Información transmitida:**
-
-* Ficha finalizada
-* Fecha de cierre
-
-### VinculacionAprendiz
-
-**Descripción:** Registro de un aprendiz asociado a una ficha.
-
-**Servicios interesados:**
-
-* Auditoría
-* Notificaciones
-
-**Información transmitida:**
-
-* Aprendiz
-* Ficha asignada
+* Coordinador
 
 ---
 
-## Contexto de Actores
+### FichaActualizada
 
-### AltaInstructor
+**Descripción**
 
-**Descripción:** Registro de un nuevo instructor dentro de la plataforma.
+Se publica cuando una ficha modifica su información.
 
-**Servicios interesados:**
+**Consumidores**
+
+* Gestión de Horarios
+* Auditoría
+
+**Información principal**
+
+* Id de ficha
+* Cambios realizados
+
+---
+
+### FichaFinalizada
+
+**Descripción**
+
+Se genera cuando una ficha termina su ciclo de formación.
+
+**Consumidores**
+
+* Gestión Documental
+* Seguimiento y Monitoreo
+* Auditoría
+
+**Información principal**
+
+* Ficha
+* Fecha de finalización
+
+---
+
+### AprendizAsignado
+
+**Descripción**
+
+Se genera cuando un aprendiz es vinculado a una ficha.
+
+**Consumidores**
 
 * Auditoría
 * Gestión de Horarios
 
-**Información transmitida:**
+**Información principal**
+
+* Aprendiz
+* Ficha
+
+---
+
+# Gestión de Actores
+
+### InstructorRegistrado
+
+**Descripción**
+
+Se genera al registrar un instructor.
+
+**Consumidores**
+
+* Gestión de Horarios
+* Auditoría
+
+**Información principal**
 
 * Instructor
 * Especialidades
-* Centro de formación
+* Centro
 
-### ModificacionInstructor
+---
 
-**Descripción:** Cambios relacionados con disponibilidad o perfil del instructor.
+### InstructorActualizado
 
-**Servicios interesados:**
+**Descripción**
+
+Se publica cuando cambia la disponibilidad o información del instructor.
+
+**Consumidores**
 
 * Gestión de Horarios
 * Auditoría
-* Notificaciones
 
-**Información transmitida:**
+**Información principal**
 
-* Instructor afectado
+* Instructor
 * Datos modificados
 
 ---
 
-## Contexto de Infraestructura
+# Gestión de Ambientes
 
-### RegistroAmbiente
+### AmbienteRegistrado
 
-**Descripción:** Creación de un nuevo ambiente de formación.
+**Descripción**
 
-**Servicios interesados:**
+Se genera al crear un nuevo ambiente.
+
+**Consumidores**
 
 * Gestión de Horarios
 * Auditoría
 
-**Información transmitida:**
+**Información principal**
 
 * Ambiente
+* Tipo
 * Capacidad
-* Ubicación
-
-### BloqueoAmbiente
-
-**Descripción:** Indica que un ambiente deja de estar disponible temporalmente.
-
-**Servicios interesados:**
-
-* Gestión de Horarios
-* Auditoría
-
-**Información transmitida:**
-
-* Ambiente afectado
-* Periodo de indisponibilidad
-* Motivo
-
-### LiberacionAmbiente
-
-**Descripción:** Restablece la disponibilidad de un ambiente previamente bloqueado.
-
-**Servicios interesados:**
-
-* Notificaciones
-* Auditoría
-
-**Información transmitida:**
-
-* Ambiente habilitado
 
 ---
 
-## Contexto de Gestión de Horarios
+### AmbienteBloqueado
 
-### ProgramacionConfirmada
+**Descripción**
 
-**Descripción:** Se genera cuando una asignación cumple todas las validaciones establecidas.
+Indica que un ambiente queda temporalmente fuera de servicio.
 
-**Servicios interesados:**
+**Consumidores**
+
+* Gestión de Horarios
+* Auditoría
+
+**Información principal**
+
+* Ambiente
+* Motivo
+* Periodo
+
+---
+
+### AmbienteLiberado
+
+**Descripción**
+
+Indica que un ambiente vuelve a estar disponible.
+
+**Consumidores**
+
+* Gestión de Horarios
+
+**Información principal**
+
+* Ambiente
+* Fecha
+
+---
+
+# Gestión de Horarios
+
+### HorarioProgramado
+
+**Descripción**
+
+Se genera cuando una programación ha sido validada correctamente.
+
+**Consumidores**
 
 * Auditoría
-* Notificaciones
-* Gestión documental
+* Gestión Documental
+* Seguimiento y Monitoreo
 
-**Información transmitida:**
+**Información principal**
 
 * Horario
 * Instructor
@@ -246,215 +312,264 @@ Los eventos de dominio representan hechos relevantes ocurridos dentro de la plat
 * Ficha
 * Franja horaria
 
-### InconsistenciaDetectada
+---
 
-**Descripción:** Identificación de conflictos durante la programación.
+### ConflictoDetectado
 
-**Servicios interesados:**
+**Descripción**
+
+Se publica cuando el sistema identifica una inconsistencia durante la programación.
+
+**Consumidores**
 
 * Auditoría
-* Notificaciones
+* Seguimiento y Monitoreo
 
-**Información transmitida:**
+**Información principal**
 
-* Tipo de conflicto
-* Elementos involucrados
+* Tipo
+* Recursos involucrados
 * Descripción
 
-### ProgramacionAnulada
+---
 
-**Descripción:** Cancelación de una asignación previamente creada.
+### HorarioCancelado
 
-**Servicios interesados:**
+**Descripción**
+
+Se genera cuando una programación es anulada.
+
+**Consumidores**
 
 * Auditoría
-* Notificaciones
-* Gestión documental
+* Gestión Documental
 
-**Información transmitida:**
+**Información principal**
 
-* Horario afectado
-* Motivo de cancelación
+* Horario
+* Motivo
 
-### FinalizacionSesion
+---
 
-**Descripción:** Confirmación de que una sesión académica fue completada.
+### SesionFinalizada
 
-**Servicios interesados:**
+**Descripción**
 
-* Monitoreo
+Confirma la finalización de una sesión académica.
+
+**Consumidores**
+
+* Seguimiento y Monitoreo
+* Gestión Documental
 * Auditoría
-* Gestión documental
 
-**Información transmitida:**
+**Información principal**
 
 * Sesión
-* Horario asociado
-* Número de asistentes
+* Horario
+* Asistencia registrada
+
+---
 
 ### AsignacionAutomaticaProcesada
 
-**Descripción:** Resultado de la ejecución del motor de programación automática.
+**Descripción**
 
-**Servicios interesados:**
+Resultado de la ejecución del motor automático de asignación.
 
+**Consumidores**
+
+* Seguimiento y Monitoreo
 * Auditoría
-* Monitoreo
-* Notificaciones
 
-**Información transmitida:**
+**Información principal**
 
-* Horarios sugeridos
+* Horarios generados
 * Restricciones evaluadas
 * Conflictos encontrados
 
 ---
 
-## Contexto de Monitoreo
+# Seguimiento y Monitoreo
 
 ### IndicadoresActualizados
 
-**Descripción:** Actualización periódica de métricas operativas.
+**Descripción**
 
-**Servicios interesados:**
+Se publica cuando los indicadores operativos son recalculados.
 
-* Auditoría
-* Notificaciones
-
-**Información transmitida:**
-
-* Fecha de cálculo
-* Indicadores obtenidos
-
-### AlertaOperativaGenerada
-
-**Descripción:** Generación automática de alertas derivadas de métricas fuera de rango.
-
-**Servicios interesados:**
-
-* Monitoreo
-* Auditoría
-* Notificaciones
-
-**Información transmitida:**
-
-* Tipo de alerta
-* Valor registrado
-* Umbral definido
-
-### MensajeNotificado
-
-**Descripción:** Registro del envío de una notificación a un usuario.
-
-**Servicios interesados:**
+**Consumidores**
 
 * Auditoría
 
-**Información transmitida:**
+**Información principal**
 
-* Destinatario
-* Canal utilizado
-* Contenido enviado
+* Fecha
+* Indicadores calculados
 
 ---
 
-## Contexto Documental
+### AlertaGenerada
 
-### ArchivoGenerado
+**Descripción**
 
-**Descripción:** Creación de documentos oficiales o reportes.
+Se genera cuando un indicador supera un umbral establecido.
 
-**Servicios interesados:**
+**Consumidores**
 
 * Auditoría
-* Gestión documental
+* Notificaciones
 
-**Información transmitida:**
+**Información principal**
 
-* Documento generado
-* Plantilla utilizada
+* Tipo
+* Prioridad
+* Valor registrado
+
+---
+
+### NotificacionEnviada
+
+**Descripción**
+
+Confirma el envío de una notificación.
+
+**Consumidores**
+
+* Auditoría
+
+**Información principal**
+
+* Destinatario
+* Canal
+* Fecha
+
+---
+
+# Gestión Documental
+
+### DocumentoGenerado
+
+**Descripción**
+
+Se genera cuando el sistema crea un documento automáticamente.
+
+**Consumidores**
+
+* Auditoría
+
+**Información principal**
+
+* Documento
+* Plantilla
 * Destinatario
 
-### ArchivoConsultado
+---
 
-**Descripción:** Descarga o visualización de un documento almacenado.
+### DocumentoConsultado
 
-**Servicios interesados:**
+**Descripción**
+
+Se publica cuando un documento es visualizado o descargado.
+
+**Consumidores**
 
 * Auditoría
 
-**Información transmitida:**
+**Información principal**
 
 * Documento
 * Usuario
-* Fecha de acceso
+* Fecha
 
 ---
 
-## Contexto de Auditoría
+# Auditoría
 
-### AccionAuditada
+### OperacionAuditada
 
-**Descripción:** Registro permanente de operaciones ejecutadas dentro de la plataforma.
+**Descripción**
 
-**Servicios interesados:**
+Representa el registro permanente de una operación realizada en cualquier contexto.
+
+**Consumidores**
 
 * Servicio de Auditoría
 
-**Información transmitida:**
+**Información principal**
 
-* Fecha y hora
-* Usuario responsable
-* Acción realizada
-* Entidad afectada
-* Estado anterior y posterior
+* Usuario
+* Operación
+* Entidad
+* Fecha
+* Correlation ID
 
 ---
 
-## Flujos representativos de eventos
+# Principios
 
-### Flujo de creación de ficha
+* Los eventos representan hechos que ya ocurrieron.
+* Los eventos son inmutables.
+* Cada evento tiene un único contexto publicador.
+* Un mismo evento puede ser consumido por varios contextos.
+* Los consumidores nunca modifican el evento recibido.
+* Todos los eventos relevantes deben quedar registrados en Auditoría.
+
+---
+
+# Flujos representativos
+
+## Creación de una ficha
 
 ```text
-Usuario
-   │
-   ▼
-CreacionFichaFormacion
-   ├── Auditoría
-   ├── Gestión de Horarios
-   └── Notificaciones
+Gestión Académica
+        │
+        ▼
+   FichaCreada
+        │
+        ├── Gestión de Horarios
+        ├── Auditoría
+        └── Gestión Documental
 ```
 
-### Flujo de programación automática
+---
+
+## Programación de horarios
 
 ```text
-Motor de Asignación
-   │
-   ▼
-AsignacionAutomaticaProcesada
-   ├── Auditoría
-   ├── Monitoreo
-   └── Notificaciones
-
-Si existen inconsistencias:
-
-AsignacionAutomaticaProcesada
-          │
-          ▼
-InconsistenciaDetectada
-          │
-          └── Alerta a coordinadores
+Gestión de Horarios
+        │
+        ▼
+ HorarioProgramado
+        │
+        ├── Auditoría
+        ├── Gestión Documental
+        └── Seguimiento y Monitoreo
 ```
 
-### Flujo de cierre de ficha
+Si ocurre un conflicto:
 
 ```text
-Sistema
-   │
-   ▼
-CierreFichaFormacion
-   ├── Gestión Documental
-   ├── Monitoreo
-   ├── Auditoría
-   └── Notificaciones
+Gestión de Horarios
+        │
+        ▼
+ ConflictoDetectado
+        │
+        ├── Auditoría
+        └── Seguimiento y Monitoreo
+```
+
+---
+
+## Finalización de una sesión
+
+```text
+Gestión de Horarios
+        │
+        ▼
+ SesionFinalizada
+        │
+        ├── Seguimiento y Monitoreo
+        ├── Gestión Documental
+        └── Auditoría
 ```

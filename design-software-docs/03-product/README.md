@@ -1,7 +1,7 @@
 # Producto
 
-> Estado: 🟡 En progreso | Última actualización: 2026-06-22
-> Autor: Por definir | Equipo: Producto y Análisis
+> Estado: 🟡 En progreso | Última actualización: 2026-06-25
+> Autor: Por definir | Equipo: Por definir
 
 ## Contenido
 
