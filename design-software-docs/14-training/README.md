@@ -1,26 +1,49 @@
 # Entrenamiento
 
-> Estado: 🔴 Pendiente | Última actualización: 2026-06-16
+> Estado: 🟡 En progreso | Última actualización: 2026-06-26
 > Autor: Por definir | Equipo: Por definir
 
 ## Contenido
 
-Contiene manuales y material de onboarding para usuarios, administradores y equipo técnico.
+Esta carpeta reúne la documentación necesaria para facilitar el aprendizaje y uso de la plataforma por parte de usuarios finales, administradores e integrantes técnicos del proyecto.
+
+---
 
 ## Audiencias
 
-| Audiencia | Documento principal | Quién lo escribe |
-|-----------|--------------------|--------------------|
-| Usuarios finales (aprendices, instructores) | `user-manual.md` | Equipo de soporte / producto |
-| Administradores del sistema | `admin-manual.md` | Equipo de soporte / operaciones |
-| Nuevos integrantes técnicos del proyecto | `technical-onboarding.md` | Equipo de desarrollo / DevOps |
+| Audiencia | Documento principal | Responsable |
+|-----------|--------------------|-------------|
+| Usuarios finales | `user-manual.md` | Equipo de Soporte |
+| Administradores | `admin-manual.md` | Equipo de Operaciones |
+| Equipo técnico | `technical-onboarding.md` | Equipo de Desarrollo |
 
-> **Equipo de soporte:** esta es la sección principal donde documentar. Procedimientos de atención, escalamiento, preguntas frecuentes y guías paso a paso para usuarios van en `user-manual.md` y `admin-manual.md`. Para documentación operativa de respuesta a incidentes, ver también [`13-operations/`](../13-operations/).
+---
 
 ## Archivos
 
 | Archivo | Descripción | Estado |
 |---------|-------------|--------|
-| [user-manual.md](./user-manual.md) | Manual para usuarios finales | 🔴 |
-| [admin-manual.md](./admin-manual.md) | Manual para administración y soporte | 🔴 |
-| [technical-onboarding.md](./technical-onboarding.md) | Guía de entrada para integrantes técnicos | 🔴 |
+| [user-manual.md](./user-manual.md) | Manual para usuarios finales | 🟡 |
+| [admin-manual.md](./admin-manual.md) | Manual para administradores | 🟡 |
+| [technical-onboarding.md](./technical-onboarding.md) | Guía para nuevos desarrolladores | 🟡 |
+
+---
+
+## Objetivos
+
+- Facilitar la adopción de la plataforma.
+- Reducir tiempos de capacitación.
+- Estandarizar procedimientos.
+- Documentar procesos frecuentes.
+- Facilitar el ingreso de nuevos integrantes al proyecto.
+
+---
+
+## Relación con otras carpetas
+
+| Carpeta | Relación |
+|---------|----------|
+| `04-requirements` | Describe las funcionalidades documentadas en los manuales. |
+| `09-microservices` | Base para el onboarding técnico. |
+| `10-devops` | Configuración del entorno de desarrollo. |
+| `13-operations` | Procedimientos de soporte y operación. |
